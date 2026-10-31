@@ -5,5 +5,6 @@ namespace Core.Entities
         public required string Name { get; set; }
         public required string TagLine { get; set; }
         public required string LogoURL { get; set; }
+        public DateTime DateStarted { get; set; }
     }
 }
