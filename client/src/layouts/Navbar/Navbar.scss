@@ -1,14 +1,43 @@
+// ==========================================
+// PUNTOS NAVBAR
+// ==========================================
+
+// Colors
 $navy: #17102f;
+$purple: #6818e8;
+$purple-hover: #5510c7;
 $yellow: #ffda00;
 $white: #ffffff;
 $gray: #89849b;
+$light-purple: #f7f3ff;
+
+// ==========================================
+// NAVBAR
+// ==========================================
 
 .navbar {
-    background-color: white !important;
+    background-color: rgba(255, 255, 255, 0.97) !important;
     color: $navy !important;
     width: 100%;
     z-index: 1000;
-    padding: 20px 0;
+    padding: 12px 0;
+
+    // Premium, subtle navy and purple shadow
+    box-shadow:
+        0 1px 2px rgba(23, 16, 47, 0.025),
+        0 4px 12px rgba(23, 16, 47, 0.035),
+        0 12px 28px rgba(107, 24, 232, 0.035) !important;
+
+    // Subtle bottom border
+    border-bottom: 1px solid rgba(107, 24, 232, 0.07);
+
+    // Optional sticky navigation
+    position: sticky !important;
+    top: 0;
+
+    // ==========================================
+    // CONTAINER
+    // ==========================================
 
     &__container {
         min-height: 76px !important;
@@ -17,12 +46,16 @@ $gray: #89849b;
         width: 100%;
         margin: 0 auto;
         padding: 0 3.2% !important;
+
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    // Logo
+    // ==========================================
+    // LOGO
+    // ==========================================
+
     &__logo {
         display: flex;
         flex-direction: column;
@@ -33,6 +66,9 @@ $gray: #89849b;
 
         img {
             width: 200px;
+            height: auto;
+            object-fit: contain;
+            display: block;
         }
     }
 
@@ -50,7 +86,10 @@ $gray: #89849b;
         margin-top: 5px;
     }
 
-    // Navigation
+    // ==========================================
+    // NAVIGATION
+    // ==========================================
+
     &__nav {
         display: flex;
         align-items: center;
@@ -70,16 +109,20 @@ $gray: #89849b;
 
     &__link {
         color: $navy !important;
-        font-size: 17px !important;
+        font-size: 16px !important;
         font-weight: 600 !important;
         text-transform: none !important;
         white-space: nowrap;
         padding: 8px 0 !important;
         min-width: unset !important;
 
+        transition:
+            color 0.2s ease,
+            opacity 0.2s ease;
+
         &:hover {
             background: transparent !important;
-            color: #6b5b9a !important;
+            color: $purple !important;
         }
 
         .MuiButton-endIcon {
@@ -97,56 +140,98 @@ $gray: #89849b;
         }
     }
 
-    // Dropdown
+    // ==========================================
+    // DROPDOWN MENU
+    // ==========================================
+
     &__dropdown-menu {
         .MuiPaper-root {
             min-width: 220px;
-            margin-top: 8px;
-            border: 1px solid #eeeaf4;
-            border-radius: 8px;
-            box-shadow: 0 12px 30px rgba(23, 16, 47, 0.1);
+            margin-top: 10px;
+            padding: 6px;
+            border: 1px solid rgba(107, 24, 232, 0.09);
+            border-radius: 12px;
+
+            // Premium dropdown shadow
+            box-shadow:
+                0 4px 10px rgba(23, 16, 47, 0.04),
+                0 12px 28px rgba(23, 16, 47, 0.08),
+                0 20px 40px rgba(107, 24, 232, 0.04);
         }
 
         .MuiMenuItem-root {
             color: $navy;
             font-size: 14px;
-            padding: 11px 18px;
+            font-weight: 500;
+            padding: 11px 14px;
+            border-radius: 7px;
+            transition:
+                background-color 0.2s ease,
+                color 0.2s ease;
 
             &:hover {
-                background-color: #f7f5fb;
+                background-color: $light-purple;
+                color: $purple;
             }
         }
     }
 
-    // CTA
+    // ==========================================
+    // CTA BUTTON
+    // ==========================================
+
     &__cta {
         min-width: 167px !important;
         height: 48px;
         padding: 0 28px !important;
         border-radius: 50px !important;
+
         background-color: $yellow !important;
         color: $navy !important;
-        font-size: 17px !important;
+
+        font-size: 16px !important;
         font-weight: 600 !important;
         text-transform: none !important;
         white-space: nowrap;
 
+        transition:
+            background-color 0.2s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+
         &:hover {
             background-color: #f0ca00 !important;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+
+            box-shadow: 0 5px 14px rgba(255, 218, 0, 0.25);
+        }
+
+        &:active {
+            transform: translateY(0);
         }
     }
 
-    // Mobile toggle
+    // ==========================================
+    // MOBILE TOGGLE
+    // ==========================================
+
     &__mobile-toggle {
         display: none !important;
         color: $navy !important;
+
+        &:hover {
+            background-color: $light-purple !important;
+        }
     }
 }
 
-// Tablet and mobile
+// ==========================================
+// TABLET AND MOBILE
+// ==========================================
+
 @media (max-width: 1199px) {
     .navbar {
+
         &__container {
             position: relative;
         }
@@ -158,12 +243,21 @@ $gray: #89849b;
         &__nav {
             display: none;
             position: absolute;
-            top: 76px;
+            top: 100%;
             left: 0;
             width: 100%;
+
             padding: 20px 5% 28px;
+
             background-color: $white;
-            box-shadow: 0 12px 20px rgba(23, 16, 47, 0.08);
+
+            // Mobile dropdown shadow
+            box-shadow:
+                0 8px 20px rgba(23, 16, 47, 0.06),
+                0 20px 40px rgba(107, 24, 232, 0.06);
+
+            border-top: 1px solid rgba(107, 24, 232, 0.06);
+
             flex-direction: column;
             align-items: stretch;
             gap: 20px;
@@ -182,12 +276,14 @@ $gray: #89849b;
 
         &__item {
             width: 100%;
+            display: block;
         }
 
         &__link {
             width: 100%;
             justify-content: space-between;
             padding: 13px 0 !important;
+            font-size: 15px !important;
         }
 
         &__cta {
@@ -196,12 +292,23 @@ $gray: #89849b;
     }
 }
 
+// ==========================================
+// SMALL MOBILE
+// ==========================================
+
 @media (max-width: 480px) {
     .navbar {
+
         &__container {
             min-height: 68px !important;
             height: 68px;
             padding: 0 20px !important;
+        }
+
+        &__logo {
+            img {
+                width: 165px;
+            }
         }
 
         &__logo-name {
@@ -214,7 +321,11 @@ $gray: #89849b;
         }
 
         &__nav {
-            top: 68px;
+            padding: 18px 20px 24px;
+        }
+
+        &__cta {
+            height: 46px;
         }
     }
 }

@@ -186,7 +186,7 @@ export default function Navbar() {
                         className="navbar__cta"
                         onClick={handleMobileClose}
                     >
-                        Book a call
+                        Puntos Portal
                     </Button>
                 </Box>
             </Toolbar>

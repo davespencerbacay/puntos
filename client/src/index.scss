@@ -1,4 +1,37 @@
+/* Gilroy font-family is loaded from CDN in index.html */
+
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+}
+
+body {
+    font-family: "Gilroy", Arial, sans-serif;
+}
+
+.font-gilroy-thin {
+    font-family: "Gilroy", Arial, sans-serif;
+    font-weight: 100;
+}
+
+.font-gilroy-regular {
+    font-family: "Gilroy", Arial, sans-serif;
+    font-weight: 400;
+}
+
+.font-gilroy-bold {
+    font-family: "Gilroy", Arial, sans-serif;
+    font-weight: 700;
+}
+
+.font-gilroy-bolder {
+    font-family: "Gilroy", Arial, sans-serif;
+    font-weight: 800;
 }
