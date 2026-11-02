@@ -17,6 +17,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import "./Navbar.scss";
+import mainLogo from "assets/main-logo.png";
+import { APP_NAME, TAG_LINE } from "constants/constants";
 
 const navigation = [
     {
@@ -78,10 +80,7 @@ export default function Navbar() {
             <Toolbar className="navbar__container">
 
                 <Box component="a" href="/" className="navbar__logo">
-                    <span className="navbar__logo-name">antavo</span>
-                    <span className="navbar__logo-tagline">
-                        AI LOYALTY CLOUD
-                    </span>
+                    <img src={mainLogo} alt={`${APP_NAME} - ${TAG_LINE}`} />
                 </Box>
 
                 {isMobile && (

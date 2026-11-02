@@ -4,10 +4,11 @@ $white: #ffffff;
 $gray: #89849b;
 
 .navbar {
-    background-color: $white !important;
+    background-color: white !important;
     color: $navy !important;
     width: 100%;
     z-index: 1000;
+    padding: 20px 0;
 
     &__container {
         min-height: 76px !important;
@@ -29,6 +30,10 @@ $gray: #89849b;
         color: $navy;
         line-height: 1;
         flex-shrink: 0;
+
+        img {
+            width: 200px;
+        }
     }
 
     &__logo-name {
