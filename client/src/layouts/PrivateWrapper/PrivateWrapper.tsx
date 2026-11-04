@@ -12,7 +12,7 @@ const PrivateWrapper: React.FC<{
         <React.Fragment>
             <Navbar />
             <main className="app-content" aria-label="Main content">
-                <Container maxWidth="xl" disableGutters>
+                <Container maxWidth="xl">
                     {props.component}
                 </Container>
             </main>

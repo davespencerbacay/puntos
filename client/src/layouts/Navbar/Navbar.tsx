@@ -62,10 +62,9 @@ export default function Navbar() {
 
     return (
         <AppBar position="sticky" elevation={0} className="navbar">
-            <Toolbar disableGutters className="navbar__toolbar">
+            <Toolbar className="navbar__toolbar">
                 <Container
                     maxWidth="xl"
-                    disableGutters
                     className="navbar__container"
                 >
                     {/* LOGO */}
