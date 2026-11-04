@@ -10,6 +10,7 @@ import {
     MenuItem,
     useMediaQuery,
     useTheme,
+    Container,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -25,22 +26,6 @@ const navigation = [
         label: "Product",
         dropdown: true,
         items: ["Platform Overview", "Loyalty Management", "AI Loyalty Cloud"],
-    },
-    {
-        label: "Solutions",
-        dropdown: true,
-        items: ["Customer Loyalty", "Customer Engagement", "Loyalty Programs"],
-    },
-    {
-        label: "Partners",
-        dropdown: true,
-        items: ["Technology Partners", "Agency Partners", "Partner Program"],
-    },
-    { label: "Customers", dropdown: false },
-    {
-        label: "Resources",
-        dropdown: true,
-        items: ["Guides", "Case Studies", "Webinars"],
     },
     { label: "Loyalty Blog", dropdown: false },
     { label: "Pricing", dropdown: false },
@@ -76,119 +61,131 @@ export default function Navbar() {
     };
 
     return (
-        <AppBar position="static" elevation={0} className="navbar">
-            <Toolbar className="navbar__container">
-
-                <Box component="a" href="/" className="navbar__logo">
-                    <img src={mainLogo} alt={`${APP_NAME} - ${TAG_LINE}`} />
-                </Box>
-
-                {isMobile && (
-                    <IconButton
-                        className="navbar__mobile-toggle"
-                        onClick={() => setMobileOpen((prev) => !prev)}
-                        aria-label="Toggle navigation"
-                        aria-expanded={mobileOpen}
-                    >
-                        {mobileOpen ? <CloseIcon /> : <MenuIcon />}
-                    </IconButton>
-                )}
-
-                <Box
-                    component="nav"
-                    className={`navbar__nav ${isMobile && mobileOpen ? "is-open" : ""
-                        }`}
+        <AppBar position="sticky" elevation={0} className="navbar">
+            <Toolbar disableGutters className="navbar__toolbar">
+                <Container
+                    maxWidth="xl"
+                    disableGutters
+                    className="navbar__container"
                 >
-                    <Box className="navbar__links">
-                        {navigation.map((item) => (
-                            <Box key={item.label} className="navbar__item">
-                                {item.dropdown ? (
-                                    <>
+                    {/* LOGO */}
+                    <Box component="a" href="/" className="navbar__logo">
+                        <img
+                            src={mainLogo}
+                            alt={`${APP_NAME} - ${TAG_LINE}`}
+                        />
+                    </Box>
+
+                    {/* MOBILE TOGGLE */}
+                    {isMobile && (
+                        <IconButton
+                            className="navbar__mobile-toggle"
+                            onClick={() => setMobileOpen((prev) => !prev)}
+                            aria-label="Toggle navigation"
+                            aria-expanded={mobileOpen}
+                        >
+                            {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+                        </IconButton>
+                    )}
+
+                    {/* NAVIGATION */}
+                    <Box
+                        component="nav"
+                        className={`navbar__nav ${isMobile && mobileOpen ? "is-open" : ""
+                            }`}
+                    >
+                        <Box className="navbar__links">
+                            {navigation.map((item) => (
+                                <Box key={item.label} className="navbar__item">
+                                    {item.dropdown ? (
+                                        <>
+                                            <Button
+                                                className="navbar__link"
+                                                onClick={(event) =>
+                                                    handleDropdownOpen(
+                                                        event,
+                                                        item.label
+                                                    )
+                                                }
+                                                endIcon={
+                                                    <KeyboardArrowDownIcon
+                                                        className={
+                                                            dropdownAnchor?.label ===
+                                                                item.label
+                                                                ? "is-rotated"
+                                                                : ""
+                                                        }
+                                                    />
+                                                }
+                                                aria-expanded={
+                                                    dropdownAnchor?.label ===
+                                                    item.label
+                                                }
+                                            >
+                                                {item.label}
+                                            </Button>
+
+                                            <Menu
+                                                anchorEl={
+                                                    dropdownAnchor?.label ===
+                                                        item.label
+                                                        ? dropdownAnchor.element
+                                                        : null
+                                                }
+                                                open={
+                                                    dropdownAnchor?.label ===
+                                                    item.label
+                                                }
+                                                onClose={handleDropdownClose}
+                                                className="navbar__dropdown-menu"
+                                                anchorOrigin={{
+                                                    vertical: "bottom",
+                                                    horizontal: "left",
+                                                }}
+                                                transformOrigin={{
+                                                    vertical: "top",
+                                                    horizontal: "left",
+                                                }}
+                                            >
+                                                {item.items?.map((subItem) => (
+                                                    <MenuItem
+                                                        key={subItem}
+                                                        onClick={() => {
+                                                            handleDropdownClose();
+                                                            handleMobileClose();
+                                                        }}
+                                                    >
+                                                        {subItem}
+                                                    </MenuItem>
+                                                ))}
+                                            </Menu>
+                                        </>
+                                    ) : (
                                         <Button
                                             className="navbar__link"
-                                            onClick={(event) =>
-                                                handleDropdownOpen(
-                                                    event,
-                                                    item.label
-                                                )
-                                            }
-                                            endIcon={
-                                                <KeyboardArrowDownIcon
-                                                    className={
-                                                        dropdownAnchor?.label ===
-                                                            item.label
-                                                            ? "is-rotated"
-                                                            : ""
-                                                    }
-                                                />
-                                            }
-                                            aria-expanded={
-                                                dropdownAnchor?.label ===
-                                                item.label
-                                            }
+                                            href="#"
+                                            onClick={handleMobileClose}
                                         >
                                             {item.label}
                                         </Button>
+                                    )}
+                                </Box>
+                            ))}
+                        </Box>
 
-                                        <Menu
-                                            anchorEl={
-                                                dropdownAnchor?.label ===
-                                                    item.label
-                                                    ? dropdownAnchor.element
-                                                    : null
-                                            }
-                                            open={
-                                                dropdownAnchor?.label ===
-                                                item.label
-                                            }
-                                            onClose={handleDropdownClose}
-                                            className="navbar__dropdown-menu"
-                                            anchorOrigin={{
-                                                vertical: "bottom",
-                                                horizontal: "left",
-                                            }}
-                                            transformOrigin={{
-                                                vertical: "top",
-                                                horizontal: "left",
-                                            }}
-                                        >
-                                            {item.items?.map((subItem) => (
-                                                <MenuItem
-                                                    key={subItem}
-                                                    onClick={() => {
-                                                        handleDropdownClose();
-                                                        handleMobileClose();
-                                                    }}
-                                                >
-                                                    {subItem}
-                                                </MenuItem>
-                                            ))}
-                                        </Menu>
-                                    </>
-                                ) : (
-                                    <Button
-                                        className="navbar__link"
-                                        href="#"
-                                        onClick={handleMobileClose}
-                                    >
-                                        {item.label}
-                                    </Button>
-                                )}
-                            </Box>
-                        ))}
+                        {/* CTA */}
+                        <Button
+                            component="a"
+                            href="#contact"
+                            variant="contained"
+                            disableElevation
+                            className="navbar__cta"
+                            onClick={handleMobileClose}
+                        >
+                            Puntos Portal
+                        </Button>
                     </Box>
-
-                    <Button
-                        component="a"
-                        href="#contact"
-                        variant="contained"
-                        disableElevation
-                        className="navbar__cta"
-                        onClick={handleMobileClose}
-                    >
-                        Puntos Portal
-                    </Button>
-                </Box>
+                </Container>
             </Toolbar>
         </AppBar>
     );

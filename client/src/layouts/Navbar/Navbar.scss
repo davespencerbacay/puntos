@@ -20,42 +20,35 @@ $light-purple: #f7f3ff;
     color: $navy !important;
     width: 100%;
     z-index: 1000;
-    padding: 12px 0;
 
-    // Premium, subtle navy and purple shadow
     box-shadow:
         0 1px 2px rgba(23, 16, 47, 0.025),
         0 4px 12px rgba(23, 16, 47, 0.035),
         0 12px 28px rgba(107, 24, 232, 0.035) !important;
 
-    // Subtle bottom border
     border-bottom: 1px solid rgba(107, 24, 232, 0.07);
 
-    // Optional sticky navigation
-    position: sticky !important;
-    top: 0;
-
-    // ==========================================
-    // CONTAINER
-    // ==========================================
-
-    &__container {
+    &__toolbar {
         min-height: 76px !important;
         height: 76px;
-        max-width: 1920px !important;
-        width: 100%;
-        margin: 0 auto;
-        padding: 0 3.2% !important;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        padding: 0 !important;
     }
 
-    // ==========================================
-    // LOGO
-    // ==========================================
+    // MUI Container handles max-width and responsive sizing
+    &__container {
+        min-height: 76px;
+        height: 100%;
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
 
+        // Custom responsive gutters
+        padding-left: 3.2% !important;
+        padding-right: 3.2% !important;
+    }
+
+    // LOGO
     &__logo {
         display: flex;
         flex-direction: column;
@@ -86,10 +79,7 @@ $light-purple: #f7f3ff;
         margin-top: 5px;
     }
 
-    // ==========================================
     // NAVIGATION
-    // ==========================================
-
     &__nav {
         display: flex;
         align-items: center;
@@ -140,10 +130,7 @@ $light-purple: #f7f3ff;
         }
     }
 
-    // ==========================================
-    // DROPDOWN MENU
-    // ==========================================
-
+    // DROPDOWN
     &__dropdown-menu {
         .MuiPaper-root {
             min-width: 220px;
@@ -152,7 +139,6 @@ $light-purple: #f7f3ff;
             border: 1px solid rgba(107, 24, 232, 0.09);
             border-radius: 12px;
 
-            // Premium dropdown shadow
             box-shadow:
                 0 4px 10px rgba(23, 16, 47, 0.04),
                 0 12px 28px rgba(23, 16, 47, 0.08),
@@ -165,6 +151,7 @@ $light-purple: #f7f3ff;
             font-weight: 500;
             padding: 11px 14px;
             border-radius: 7px;
+
             transition:
                 background-color 0.2s ease,
                 color 0.2s ease;
@@ -176,10 +163,7 @@ $light-purple: #f7f3ff;
         }
     }
 
-    // ==========================================
-    // CTA BUTTON
-    // ==========================================
-
+    // CTA
     &__cta {
         min-width: 167px !important;
         height: 48px;
@@ -202,7 +186,6 @@ $light-purple: #f7f3ff;
         &:hover {
             background-color: #f0ca00 !important;
             transform: translateY(-2px);
-
             box-shadow: 0 5px 14px rgba(255, 218, 0, 0.25);
         }
 
@@ -211,10 +194,7 @@ $light-purple: #f7f3ff;
         }
     }
 
-    // ==========================================
     // MOBILE TOGGLE
-    // ==========================================
-
     &__mobile-toggle {
         display: none !important;
         color: $navy !important;
@@ -231,7 +211,6 @@ $light-purple: #f7f3ff;
 
 @media (max-width: 1199px) {
     .navbar {
-
         &__container {
             position: relative;
         }
@@ -246,12 +225,10 @@ $light-purple: #f7f3ff;
             top: 100%;
             left: 0;
             width: 100%;
-
             padding: 20px 5% 28px;
 
             background-color: $white;
 
-            // Mobile dropdown shadow
             box-shadow:
                 0 8px 20px rgba(23, 16, 47, 0.06),
                 0 20px 40px rgba(107, 24, 232, 0.06);
@@ -298,10 +275,13 @@ $light-purple: #f7f3ff;
 
 @media (max-width: 480px) {
     .navbar {
-
-        &__container {
+        &__toolbar {
             min-height: 68px !important;
             height: 68px;
+        }
+
+        &__container {
+            min-height: 68px;
             padding: 0 20px !important;
         }
 
