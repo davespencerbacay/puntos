@@ -1,5 +1,23 @@
 /* Gilroy font-family is loaded from CDN in index.html */
 
+:root {
+    --color-primary: #6818e8;
+    --color-primary-hover: #5510c7;
+    --color-secondary: #17102f;
+    --color-accent: #ffda00;
+    --color-background: #f8f6fc;
+    --color-surface: #ffffff;
+    --color-surface-hover: #f5f0ff;
+    --color-text-primary: #17102f;
+    --color-text-secondary: #47405e;
+    --color-text-muted: #89849b;
+    --color-border: #ddd5ee;
+    --color-input-background: #ffffff;
+    --color-error: #d14343;
+    --color-success: #177d47;
+    --color-warning: #b77a00;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -14,6 +32,8 @@ body,
 
 body {
     font-family: "Gilroy", Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
 }
 
 .font-gilroy-thin {
