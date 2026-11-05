@@ -9,6 +9,12 @@ export default defineConfig({
     alias: {
       constants: path.resolve(import.meta.dirname, './src/constants'),
       assets: path.resolve(import.meta.dirname, './src/assets'),
+      models: path.resolve(import.meta.dirname, './src/models'),
+      pages: path.resolve(import.meta.dirname, './src/pages'),
+      services: path.resolve(import.meta.dirname, './src/services'),
+      layouts: path.resolve(import.meta.dirname, './src/layouts'),
+      components: path.resolve(import.meta.dirname, './src/components'),
+      utilities: path.resolve(import.meta.dirname, './src/utilities'),
     },
   },
   server: {

@@ -19,17 +19,7 @@ import { Link as RouterLink } from "react-router-dom";
 import mainLogo from "assets/main-logo.png";
 import { APP_NAME, TAG_LINE } from "constants/constants";
 import UserInformationCard from "../../components/user-information/UserInformationCard";
-
-type RegisterFormValues = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    password: string;
-};
-
-type RegisterFormTouched = Record<keyof RegisterFormValues, boolean>;
-type RegisterFormErrors = Record<keyof RegisterFormValues, string>;
+import type { RegisterFormErrors, RegisterFormTouched, RegisterFormValues } from "models/register";
 
 const initialValues: RegisterFormValues = {
     firstName: "",
@@ -334,7 +324,7 @@ const Register = () => {
 
                         <Typography sx={{ textAlign: "center", color: "var(--color-text-secondary)" }}>
                             Already have an account?{" "}
-                            <Link component={RouterLink} to="/portal/dashboard" sx={{ color: "var(--color-primary)", fontWeight: 700 }}>
+                            <Link component={RouterLink} to="/login" sx={{ color: "var(--color-primary)", fontWeight: 700 }}>
                                 Sign in
                             </Link>
                         </Typography>

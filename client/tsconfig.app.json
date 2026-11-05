@@ -7,6 +7,27 @@
       ],
       "assets/*": [
         "./src/assets/*"
+      ],
+      "models/*": [
+        "./src/models/*"
+      ],
+      "pages/*": [
+        "./src/pages/*"
+      ],
+      "services/*": [
+        "./src/services/*"
+      ],
+      "components/*": [
+        "./src/components/*"
+      ],
+      "layouts/*": [
+        "./src/layouts/*"
+      ],
+      "theme/*": [
+        "./src/theme/*"
+      ],
+      "utilities/*": [
+        "./src/utilities/*"
       ]
     },
     "target": "es2023",

@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/home/Home'
 import Register from './pages/register/Register'
+import Login from './pages/login/Login'
 
 import './App.scss'
 
@@ -23,6 +24,10 @@ const App = () => {
         <Route
           path="/register"
           element={<PublicWrapper component={<Register />} />}
+        />
+        <Route
+          path="/login"
+          element={<PublicWrapper component={<Login />} />}
         />
 
         {/* Customer portal */}
