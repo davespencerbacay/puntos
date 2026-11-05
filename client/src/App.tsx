@@ -7,6 +7,7 @@ import './App.scss'
 
 // Portal pages
 import Dashboard from './pages/portal/dashboard/Dashboard'
+import Profile from './pages/profile/Profile'
 
 // Layouts
 import PublicWrapper from './layouts/PublicWrapper/PublicWrapper'
@@ -31,6 +32,10 @@ const App = () => {
         />
 
         {/* Customer portal */}
+        <Route
+          path="/portal/profile"
+          element={<PrivateWrapper component={<Profile />} />}
+        />
         <Route path="/portal" element={<PrivateWrapper component={<Dashboard />} />}>
           <Route path="dashboard" element={<Dashboard />} />
         </Route>
