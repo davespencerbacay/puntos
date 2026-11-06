@@ -1,17 +1,19 @@
-import { Routes, Route } from 'react-router-dom'
-import Home from './pages/home/Home'
-import Register from './pages/register/Register'
-import Login from './pages/login/Login'
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import './App.scss'
+import Home from "./pages/home/Home";
+import Register from "./pages/register/Register";
+import Login from "./pages/login/Login";
 
 // Portal pages
-import Dashboard from './pages/portal/dashboard/Dashboard'
-import Profile from './pages/profile/Profile'
+import Dashboard from "./pages/portal/dashboard/Dashboard";
+import Profile from "./pages/portal/profile/Profile";
 
 // Layouts
-import PublicWrapper from './layouts/PublicWrapper/PublicWrapper'
-import PrivateWrapper from './layouts/PrivateWrapper/PrivateWrapper'
+import PublicWrapper from "./layouts/PublicWrapper/PublicWrapper";
+import PrivateWrapper from "./layouts/PrivateWrapper/PrivateWrapper";
+
+import "./App.scss";
+import FAQs from "pages/portal/faqs/Faqs";
 
 const App = () => {
   return (
@@ -22,10 +24,12 @@ const App = () => {
           path="/"
           element={<PublicWrapper component={<Home />} />}
         />
+
         <Route
           path="/register"
           element={<PublicWrapper component={<Register />} />}
         />
+
         <Route
           path="/login"
           element={<PublicWrapper component={<Login />} />}
@@ -33,15 +37,32 @@ const App = () => {
 
         {/* Customer portal */}
         <Route
-          path="/portal/profile"
-          element={<PrivateWrapper component={<Profile />} />}
-        />
-        <Route path="/portal" element={<PrivateWrapper component={<Dashboard />} />}>
-          <Route path="dashboard" element={<Dashboard />} />
+          path="/portal"
+          element={<PrivateWrapper />}
+        >
+          <Route
+            index
+            element={<Navigate to="dashboard" replace />}
+          />
+
+          <Route
+            path="dashboard"
+            element={<Dashboard />}
+          />
+
+          <Route
+            path="profile"
+            element={<Profile />}
+          />
+
+          <Route
+            path="faqs"
+            element={<FAQs />}
+          />
         </Route>
       </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

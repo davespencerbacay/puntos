@@ -30,9 +30,19 @@
 
 .profile-card {
     background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
+    border: none;
+    border-radius: 12px;
     padding: 20px;
+    box-shadow:
+        0 2px 8px rgba(23, 16, 47, 0.04),
+        0 8px 24px rgba(23, 16, 47, 0.06);
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+        box-shadow:
+            0 4px 12px rgba(23, 16, 47, 0.05),
+            0 12px 28px rgba(23, 16, 47, 0.08);
+    }
 }
 
 .profile-overview {
@@ -69,7 +79,7 @@
     min-height: 64px;
     justify-content: center;
     border: 1px solid var(--color-border);
-    border-radius: 12px;
+    border-radius: 0;
     background-color: var(--color-surface-hover);
     padding: 12px;
 }
@@ -105,8 +115,8 @@
 
 .profile-section__title {
     color: var(--color-text-primary);
-    font-size: 1.05rem;
-    font-weight: 700;
+    font-size: 2.12rem;
+    font-weight: 700 !important;
 }
 
 .profile-section__subtitle {
@@ -135,7 +145,7 @@
 
 .profile-account-item {
     border: 1px solid var(--color-border);
-    border-radius: 12px;
+    border-radius: 0;
     background-color: var(--color-surface-hover);
     padding: 12px;
     display: flex;
@@ -171,7 +181,7 @@
 @media (max-width: 600px) {
     .profile-card {
         padding: 16px;
-        border-radius: 14px;
+        border-radius: 0;
     }
 
     .profile-page__title {

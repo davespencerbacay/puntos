@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Alert, Box, Breadcrumbs, Snackbar, Typography } from "@mui/material";
+import { Alert, Box, Snackbar } from "@mui/material";
 
 import type {
     AccountInformationValues,
@@ -12,12 +12,13 @@ import type {
     ProfileOverviewData,
 } from "models/profile";
 
-import AccountInformation from "pages/profile/components/AccountInformation";
-import AddressInformation from "pages/profile/components/AddressInformation";
-import PersonalInformation from "pages/profile/components/PersonalInformation";
-import ProfileOverview from "pages/profile/components/ProfileOverview";
+import AccountInformation from "pages/portal/profile/components/AccountInformation";
+import AddressInformation from "pages/portal/profile/components/AddressInformation";
+import PersonalInformation from "pages/portal/profile/components/PersonalInformation";
+import ProfileOverview from "pages/portal/profile/components/ProfileOverview";
 
 import "./Profile.scss";
+import Breadcrumbs from "components/breadcrumbs/Breadcrumbs";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^\+?[0-9()\-\s]{7,20}$/;
@@ -323,21 +324,13 @@ const Profile = () => {
 
     return (
         <Box className="profile-page">
-            <Box className="profile-page__header">
-                <Breadcrumbs separator="/" aria-label="Portal breadcrumb" className="profile-breadcrumb">
-                    <Typography component="span" sx={{ color: "var(--color-text-muted)", fontSize: "0.85rem" }}>
-                        Portal
-                    </Typography>
-                    <Typography component="span" sx={{ color: "var(--color-text-primary)", fontSize: "0.85rem", fontWeight: 700 }}>
-                        My Profile
-                    </Typography>
-                </Breadcrumbs>
-
-                <Typography className="profile-page__title">My Profile</Typography>
-                <Typography className="profile-page__subtitle">
-                    Manage your personal information and account details.
-                </Typography>
-            </Box>
+            <Breadcrumbs
+                items={[
+                    { label: "ContentHub", href: "/portal/content-hub" },
+                    { label: "Email Templates", href: "/portal/content-hub/email-templates" },
+                    { label: "Create Template" },
+                ]}
+            />
 
             <ProfileOverview profile={overview} onEditProfile={openPersonalEditorFromOverview} />
 

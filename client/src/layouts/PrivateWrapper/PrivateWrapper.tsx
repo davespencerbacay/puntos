@@ -7,12 +7,9 @@ import Footer from "../Footer/Footer"
 import Sidebar from "../Sidebar/Sidebar"
 
 import "./PrivateWrapper.scss"
+import { Outlet } from "react-router-dom"
 
-interface PrivateWrapperProps {
-    component: React.ReactNode
-}
-
-const PrivateWrapper: React.FC<PrivateWrapperProps> = ({ component }) => {
+const PrivateWrapper: React.FC = () => {
     return (
         <React.Fragment>
             <Navbar />
@@ -25,7 +22,7 @@ const PrivateWrapper: React.FC<PrivateWrapperProps> = ({ component }) => {
                         </Grid>
 
                         <Grid size={{ xs: 12, md: 9, lg: 9 }}>
-                            {component}
+                            <Outlet />
                         </Grid>
                     </Grid>
                 </Container>
