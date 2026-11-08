@@ -1,11 +1,10 @@
-
 import React from "react";
 import {
     Box,
     Breadcrumbs as MuiBreadcrumbs,
-    Link,
     Typography,
 } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
@@ -20,55 +19,73 @@ export interface BreadcrumbItem {
 interface BreadcrumbsProps {
     items: BreadcrumbItem[];
     homeHref?: string;
+    homeLabel?: string;
 }
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     items,
     homeHref = "/portal",
+    homeLabel = "Portal",
 }) => {
     return (
-        <MuiBreadcrumbs
-            separator={<ChevronRightRoundedIcon className="puntos-breadcrumb__separator" />}
-            aria-label="Breadcrumb"
-            className="puntos-breadcrumb"
-        >
-            <Link
-                href={homeHref}
-                underline="none"
-                className="puntos-breadcrumb__link"
+        <Box className="puntos-breadcrumb-wrapper">
+            <MuiBreadcrumbs
+                separator={
+                    <ChevronRightRoundedIcon className="puntos-breadcrumb__separator" />
+                }
+                aria-label="Breadcrumb"
+                className="puntos-breadcrumb"
+                maxItems={5}
+                itemsBeforeCollapse={2}
+                itemsAfterCollapse={2}
             >
-                <HomeRoundedIcon className="puntos-breadcrumb__home-icon" />
-                <span>Portal</span>
-            </Link>
+                <Box
+                    component={RouterLink}
+                    to={homeHref}
+                    className="puntos-breadcrumb__link puntos-breadcrumb__home"
+                    aria-label={homeLabel}
+                >
+                    <HomeRoundedIcon />
+                    <span>{homeLabel}</span>
+                </Box>
 
-            {items.map((item, index) => {
-                const isLast = index === items.length - 1;
+                {items.map((item, index) => {
+                    const isLast = index === items.length - 1;
 
-                if (isLast) {
-                    return (
-                        <Box
-                            key={`${item.label}-${index}`}
-                            className="puntos-breadcrumb__current"
-                        >
-                            <Typography component="span">
+                    if (isLast) {
+                        return (
+                            <Typography
+                                key={`${item.label}-${index}`}
+                                component="span"
+                                className="puntos-breadcrumb__current"
+                                aria-current="page"
+                            >
                                 {item.label}
                             </Typography>
-                        </Box>
-                    );
-                }
+                        );
+                    }
 
-                return (
-                    <Link
-                        key={`${item.label}-${index}`}
-                        href={item.href || "#"}
-                        underline="none"
-                        className="puntos-breadcrumb__link"
-                    >
-                        {item.label}
-                    </Link>
-                );
-            })}
-        </MuiBreadcrumbs>
+                    return item.href ? (
+                        <Box
+                            key={`${item.label}-${index}`}
+                            component={RouterLink}
+                            to={item.href}
+                            className="puntos-breadcrumb__link"
+                        >
+                            {item.label}
+                        </Box>
+                    ) : (
+                        <Typography
+                            key={`${item.label}-${index}`}
+                            component="span"
+                            className="puntos-breadcrumb__parent"
+                        >
+                            {item.label}
+                        </Typography>
+                    );
+                })}
+            </MuiBreadcrumbs>
+        </Box>
     );
 };
 

@@ -14,6 +14,7 @@ import PrivateWrapper from "./layouts/PrivateWrapper/PrivateWrapper";
 
 import "./App.scss";
 import FAQs from "pages/portal/faqs/Faqs";
+import Pricing from "pages/pricing/Pricing";
 
 const App = () => {
   return (
@@ -33,6 +34,11 @@ const App = () => {
         <Route
           path="/login"
           element={<PublicWrapper component={<Login />} />}
+        />
+
+        <Route
+          path="/pricing"
+          element={<PublicWrapper component={<Pricing />} />}
         />
 
         {/* Customer portal */}
