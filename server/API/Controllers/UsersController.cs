@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.Interfaces;
 using Infrastracture.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,24 +8,19 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UsersController : ControllerBase
+public class UsersController(IUserRepository userRepository) : ControllerBase
 {
-    private readonly StoreContext context;
-    public UsersController(StoreContext context)
-    {
-        this.context = context;
-    }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+    public async Task<ActionResult<IReadOnlyList<User>>> GetUsers()
     {
-        return await context.Users.ToListAsync();
+        return Ok(await userRepository.GetUsersAsync());
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> GetUser(int id)
     {
-        var user = await context.Users.FindAsync(id);
+        var user = await userRepository.GetUserByIdAsync(id);
         if (user == null)
         {
             return NotFound();
@@ -35,41 +31,46 @@ public class UsersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<User>> CreateUser(User user)
     {
-        context.Users.Add(user);
-        await context.SaveChangesAsync();
-        return user;
+        userRepository.AddUser(user);
+        if (await userRepository.SaveChangesAsync())
+        {
+            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+        }
+        return BadRequest("[Users] Problem creating user.");
     }
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(int id, User user)
     {
-        if (id != user.Id)
+        if (id != user.Id || !userRepository.UserExists(id))
         {
-            return BadRequest();
+            return BadRequest(user.Id);
         }
 
-        context.Entry(user).State = EntityState.Modified;
+        userRepository.UpdateUser(user);
 
-        try
+        if (await userRepository.SaveChangesAsync())
         {
-            await context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!UserExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
+            return NoContent();
         }
 
-        return NoContent();
+        return BadRequest("[Users] Problem updating user.");
     }
 
-    private bool UserExists(int id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
     {
-        return context.Users.Any(e => e.Id == id);
+        var user = await userRepository.GetUserByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound("[Users] User not found.");
+        }
+
+        userRepository.DeleteUser(user);
+        if (await userRepository.SaveChangesAsync())
+        {
+            return NoContent();
+        }
+
+        return BadRequest("[Users] Problem deleting user.");
     }
 }

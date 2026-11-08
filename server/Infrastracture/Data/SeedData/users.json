@@ -1,0 +1,82 @@
+[
+    {
+        "firstName": "Sophia",
+        "lastName": "Reyes",
+        "avatar": "https://i.pravatar.cc/300?img=47",
+        "emailAddress": "sophia.reyes@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    },
+    {
+        "firstName": "Daniel",
+        "lastName": "Cruz",
+        "avatar": "https://i.pravatar.cc/300?img=12",
+        "emailAddress": "daniel.cruz@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    },
+    {
+        "firstName": "Isabella",
+        "lastName": "Santos",
+        "avatar": "https://i.pravatar.cc/300?img=44",
+        "emailAddress": "isabella.santos@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    },
+    {
+        "firstName": "Gabriel",
+        "lastName": "Torres",
+        "avatar": "https://i.pravatar.cc/300?img=13",
+        "emailAddress": "gabriel.torres@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    },
+    {
+        "firstName": "Olivia",
+        "lastName": "Garcia",
+        "avatar": "https://i.pravatar.cc/300?img=49",
+        "emailAddress": "olivia.garcia@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    },
+    {
+        "firstName": "Ethan",
+        "lastName": "Mendoza",
+        "avatar": "https://i.pravatar.cc/300?img=14",
+        "emailAddress": "ethan.mendoza@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    },
+    {
+        "firstName": "Ava",
+        "lastName": "Bautista",
+        "avatar": "https://i.pravatar.cc/300?img=45",
+        "emailAddress": "ava.bautista@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    },
+    {
+        "firstName": "Lucas",
+        "lastName": "Villanueva",
+        "avatar": "https://i.pravatar.cc/300?img=15",
+        "emailAddress": "lucas.villanueva@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    },
+    {
+        "firstName": "Mia",
+        "lastName": "Aquino",
+        "avatar": "https://i.pravatar.cc/300?img=48",
+        "emailAddress": "mia.aquino@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    },
+    {
+        "firstName": "Nathan",
+        "lastName": "Castillo",
+        "avatar": "https://i.pravatar.cc/300?img=16",
+        "emailAddress": "nathan.castillo@example.com",
+        "password": "Password123!",
+        "confirmPassword": "Password123!"
+    }
+]
