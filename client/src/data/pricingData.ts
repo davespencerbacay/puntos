@@ -57,6 +57,7 @@ export const pricingPlans: PricingPlan[] = [
             "Custom feature requests",
             "Tailored solutions for your business",
             "Flexible business requirements",
+            "Customer Support and dedicated account management",
         ],
     },
 ];
