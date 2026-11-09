@@ -28,6 +28,11 @@ namespace Infrastracture.Data
                 query = query.Skip(spec.Skip).Take(spec.Take);
             }
 
+            if (spec.IsDistinct)
+            {
+                query = query.Distinct();
+            }
+
             return query;
         }
 
@@ -58,6 +63,11 @@ namespace Infrastracture.Data
             if (spec.Select != null)
             {
                 selectQuery = query.Select(spec.Select);
+            }
+
+            if (spec.IsDistinct)
+            {
+                selectQuery = selectQuery?.Distinct();
             }
             return selectQuery ?? query.Cast<TResult>();
         }

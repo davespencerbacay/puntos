@@ -21,6 +21,8 @@ namespace Core.Specifications
 
         public bool IsPagingEnabled { get; private set; }
 
+        public bool IsDistinct { get; private set; }
+
         protected void AddInclude(Expression<Func<T, object>> includeExpression)
         {
             Includes.Add(includeExpression);
@@ -34,6 +36,11 @@ namespace Core.Specifications
         protected void AddOrderByDescending(Expression<Func<T, object>> orderByDescExpression)
         {
             OrderByDescending = orderByDescExpression;
+        }
+
+        protected void ApplyDistinct()
+        {
+            IsDistinct = true;
         }
 
         protected void ApplyPaging(int skip, int take)

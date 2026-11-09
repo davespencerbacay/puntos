@@ -11,6 +11,7 @@ namespace Core.Interfaces
         int Take { get; }
         int Skip { get; }
         bool IsPagingEnabled { get; }
+        bool IsDistinct { get; }
     }
 
     public interface ISpecification<T, TResult> : ISpecification<T>
