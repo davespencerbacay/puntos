@@ -10,9 +10,10 @@ public class UsersController(IUserRepository userRepository) : ControllerBase
 {
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<User>>> GetUsers()
+    public async Task<ActionResult<IReadOnlyList<User>>> GetUsers(int UserTypeId, string? sort)
     {
-        return Ok(await userRepository.GetUsersAsync());
+        var users = await userRepository.GetUsersAsync(UserTypeId, sort);
+        return Ok(users);
     }
 
     [HttpGet("user-type/{userTypeId}")]

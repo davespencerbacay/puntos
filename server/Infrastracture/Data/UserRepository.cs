@@ -30,8 +30,30 @@ namespace Infrastracture.Data
             return await context.Users.FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<User>> GetUsersAsync()
+        public async Task<IReadOnlyList<User>> GetUsersAsync(int UserTypeId, string? sort)
         {
+            if (!string.IsNullOrEmpty(sort))
+            {
+                if (sort.ToLower() == "asc")
+                {
+                    return await context.Users
+                        .OrderBy(u => u.Id)
+                        .ToListAsync();
+                }
+                else if (sort.ToLower() == "desc")
+                {
+                    return await context.Users
+                        .OrderByDescending(u => u.Id)
+                        .ToListAsync();
+                }
+            }
+
+            if (UserTypeId > 0)
+            {
+                return await context.Users
+                    .Where(u => u.UserTypeId == UserTypeId)
+                    .ToListAsync();
+            }
             return await context.Users.ToListAsync();
         }
 

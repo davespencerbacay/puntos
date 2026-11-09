@@ -4,7 +4,7 @@ namespace Core.Interfaces
 {
     public interface IUserRepository
     {
-        Task<IReadOnlyList<User>> GetUsersAsync();
+        Task<IReadOnlyList<User>> GetUsersAsync(int UserTypeId, string? sort);
         Task<User?> GetUserByIdAsync(int id);
         Task<IReadOnlyList<User>> GetUsersByUserTypeAsync(int userTypeId);
         void AddUser(User user);
