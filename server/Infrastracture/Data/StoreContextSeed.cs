@@ -7,6 +7,19 @@ namespace Infrastracture.Data.SeedData
     {
         public static async Task SeedAsync(StoreContext context)
         {
+            if (!context.UserTypes.Any())
+            {
+                var userTypes = new List<UserType>
+                {
+                    new() { Name = "Customer" },
+                    new() { Name = "Partner" },
+                    new() { Name = "Business" }
+                };
+
+                context.UserTypes.AddRange(userTypes);
+                await context.SaveChangesAsync();
+            }
+
             if (!context.Users.Any())
             {
                 var usersData = await File.ReadAllTextAsync(
@@ -23,21 +36,13 @@ namespace Infrastracture.Data.SeedData
                     options
                 ) ?? throw new Exception("Failed to deserialize users data.");
 
+                foreach (var user in users)
+                {
+                    user.UserTypeId = 1;
+                }
+
                 context.Users.AddRange(users);
 
-                await context.SaveChangesAsync();
-            }
-
-            if (!context.UserTypes.Any())
-            {
-                var userTypes = new List<UserType>
-                {
-                    new() { Name = "Customer" },
-                    new() { Name = "Partner" },
-                    new() { Name = "Business" }
-                };
-
-                context.UserTypes.AddRange(userTypes);
                 await context.SaveChangesAsync();
             }
         }

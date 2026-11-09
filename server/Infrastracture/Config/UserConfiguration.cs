@@ -15,6 +15,13 @@ namespace Infrastracture.Config
             builder.Property(u => u.EmailAddress).IsRequired();
             builder.Property(u => u.Password).IsRequired();
             builder.Property(u => u.ConfirmPassword).IsRequired();
+            builder.Property(u => u.UserTypeId).IsRequired();
+
+            builder
+                .HasOne(u => u.UserType)
+                .WithMany(ut => ut.Users)
+                .HasForeignKey(u => u.UserTypeId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
