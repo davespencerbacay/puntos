@@ -18,6 +18,13 @@ namespace Infrastracture.Data
             context.Users.Remove(user);
         }
 
+        public async Task<IReadOnlyList<User>> GetUsersByUserTypeAsync(int userTypeId)
+        {
+            return await context.Users
+                .Where(u => u.UserTypeId == userTypeId)
+                .ToListAsync();
+        }
+
         public async Task<User?> GetUserByIdAsync(int id)
         {
             return await context.Users.FindAsync(id);

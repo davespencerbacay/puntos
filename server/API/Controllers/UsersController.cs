@@ -1,8 +1,6 @@
 using Core.Entities;
 using Core.Interfaces;
-using Infrastracture.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -17,6 +15,17 @@ public class UsersController(IUserRepository userRepository) : ControllerBase
         return Ok(await userRepository.GetUsersAsync());
     }
 
+    [HttpGet("user-type/{userTypeId}")]
+    public async Task<ActionResult<IReadOnlyList<User>>> GetUsersByUserType(int userTypeId)
+    {
+        var users = await userRepository.GetUsersByUserTypeAsync(userTypeId);
+        if (users.Count == 0)
+        {
+            return NotFound($"[Users] No users found for UserTypeId {userTypeId}.");
+        }
+
+        return Ok(users);
+    }
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> GetUser(int id)
     {

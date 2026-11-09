@@ -14,7 +14,6 @@ namespace Infrastracture.Config
             builder.Property(u => u.LastName).IsRequired();
             builder.Property(u => u.EmailAddress).IsRequired();
             builder.Property(u => u.Password).IsRequired();
-            builder.Property(u => u.ConfirmPassword).IsRequired();
             builder.Property(u => u.UserTypeId).IsRequired();
 
             builder

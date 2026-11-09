@@ -6,6 +6,7 @@ namespace Core.Interfaces
     {
         Task<IReadOnlyList<User>> GetUsersAsync();
         Task<User?> GetUserByIdAsync(int id);
+        Task<IReadOnlyList<User>> GetUsersByUserTypeAsync(int userTypeId);
         void AddUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);
