@@ -12,4 +12,9 @@ namespace Core.Interfaces
         int Skip { get; }
         bool IsPagingEnabled { get; }
     }
+
+    public interface ISpecification<T, TResult> : ISpecification<T>
+    {
+        Expression<Func<T, TResult>>? Select { get; }
+    }
 }
