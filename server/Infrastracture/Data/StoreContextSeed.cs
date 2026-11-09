@@ -27,6 +27,19 @@ namespace Infrastracture.Data.SeedData
 
                 await context.SaveChangesAsync();
             }
+
+            if (!context.UserTypes.Any())
+            {
+                var userTypes = new List<UserType>
+                {
+                    new() { Name = "Customer" },
+                    new() { Name = "Partner" },
+                    new() { Name = "Business" }
+                };
+
+                context.UserTypes.AddRange(userTypes);
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

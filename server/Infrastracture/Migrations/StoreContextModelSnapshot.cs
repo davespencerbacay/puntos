@@ -57,6 +57,23 @@ namespace Infrastracture.Migrations
 
                     b.ToTable("Users");
                 });
+
+            modelBuilder.Entity("Core.Entities.UserType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserTypes");
+                });
 #pragma warning restore 612, 618
         }
     }
