@@ -9,5 +9,6 @@ namespace Core.Entities
         public required string Password { get; set; }
         public int UserTypeId { get; set; }
         public required UserType UserType { get; set; }
+        public UserSettings? Settings { get; set; }
     }
 }
