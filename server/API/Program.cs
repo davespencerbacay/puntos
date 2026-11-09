@@ -14,6 +14,7 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 });
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserTypeRepository, UserTypeRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
 

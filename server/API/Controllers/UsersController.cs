@@ -1,25 +1,28 @@
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UsersController(IUserRepository userRepository) : ControllerBase
+public class UsersController(IGenericRepository<User> userRepository) : ControllerBase
 {
 
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<User>>> GetUsers(int UserTypeId, string? sort)
     {
-        var users = await userRepository.GetUsersAsync(UserTypeId, sort);
+        var spec = new UserSpecification(UserTypeId, sort);
+        var users = await userRepository.ListAsync(spec);
         return Ok(users);
     }
 
     [HttpGet("user-type/{userTypeId}")]
     public async Task<ActionResult<IReadOnlyList<User>>> GetUsersByUserType(int userTypeId)
     {
-        var users = await userRepository.GetUsersByUserTypeAsync(userTypeId);
+        var spec = new UserSpecification(userTypeId, null);
+        var users = await userRepository.ListAsync(spec);
         if (users.Count == 0)
         {
             return NotFound($"[Users] No users found for UserTypeId {userTypeId}.");
@@ -30,7 +33,7 @@ public class UsersController(IUserRepository userRepository) : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> GetUser(int id)
     {
-        var user = await userRepository.GetUserByIdAsync(id);
+        var user = await userRepository.GetByIdAsync(id);
         if (user == null)
         {
             return NotFound();
@@ -41,7 +44,7 @@ public class UsersController(IUserRepository userRepository) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<User>> CreateUser(User user)
     {
-        userRepository.AddUser(user);
+        userRepository.Add(user);
         if (await userRepository.SaveChangesAsync())
         {
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
@@ -51,12 +54,12 @@ public class UsersController(IUserRepository userRepository) : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(int id, User user)
     {
-        if (id != user.Id || !userRepository.UserExists(id))
+        if (id != user.Id || !userRepository.Exists(id))
         {
             return BadRequest(user.Id);
         }
 
-        userRepository.UpdateUser(user);
+        userRepository.Update(user);
 
         if (await userRepository.SaveChangesAsync())
         {
@@ -69,13 +72,13 @@ public class UsersController(IUserRepository userRepository) : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(int id)
     {
-        var user = await userRepository.GetUserByIdAsync(id);
+        var user = await userRepository.GetByIdAsync(id);
         if (user == null)
         {
             return NotFound("[Users] User not found.");
         }
 
-        userRepository.DeleteUser(user);
+        userRepository.Remove(user);
         if (await userRepository.SaveChangesAsync())
         {
             return NoContent();
