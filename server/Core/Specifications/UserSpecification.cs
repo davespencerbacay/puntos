@@ -4,12 +4,13 @@ namespace Core.Specifications
 {
     public class UserSpecification : BaseSpecification<User>
     {
-        public UserSpecification(int userTypeId, string? sort)
-            : base(x => x.UserTypeId == userTypeId)
+        public UserSpecification(UserSpecParams userSpecParams) : base(x => userSpecParams.UserTypes.Count == 0 || userSpecParams.UserTypes.Contains(x.UserTypeId.ToString()))
         {
-            if (!string.IsNullOrWhiteSpace(sort))
+            AddInclude(x => x.UserType);
+
+            if (!string.IsNullOrWhiteSpace(userSpecParams.Sort))
             {
-                switch (sort.ToLower())
+                switch (userSpecParams.Sort.ToLower())
                 {
                     case "asc":
                         AddOrderBy(x => x.Id);

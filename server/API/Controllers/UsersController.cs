@@ -11,9 +11,9 @@ public class UsersController(IGenericRepository<User> userRepository) : Controll
 {
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<User>>> GetUsers(int UserTypeId, string? sort)
+    public async Task<ActionResult<IReadOnlyList<User>>> GetUsers([FromQuery] UserSpecParams userSpecParams)
     {
-        var spec = new UserSpecification(UserTypeId, sort);
+        var spec = new UserSpecification(userSpecParams);
         var users = await userRepository.ListAsync(spec);
         return Ok(users);
     }
@@ -21,7 +21,7 @@ public class UsersController(IGenericRepository<User> userRepository) : Controll
     [HttpGet("user-type/{userTypeId}")]
     public async Task<ActionResult<IReadOnlyList<User>>> GetUsersByUserType(int userTypeId)
     {
-        var spec = new UserSpecification(userTypeId, null);
+        var spec = new UserSpecification(new UserSpecParams { UserTypes = new List<string> { userTypeId.ToString() } });
         var users = await userRepository.ListAsync(spec);
         if (users.Count == 0)
         {

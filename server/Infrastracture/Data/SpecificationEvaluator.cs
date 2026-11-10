@@ -1,5 +1,6 @@
 using Core.Entities;
 using Core.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastracture.Data
 {
@@ -13,6 +14,8 @@ namespace Infrastracture.Data
             {
                 query = query.Where(spec.Criteria);
             }
+
+            query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
 
             if (spec.OrderBy != null)
             {
@@ -44,6 +47,8 @@ namespace Infrastracture.Data
             {
                 query = query.Where(spec.Criteria);
             }
+
+            query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
 
             if (spec.OrderBy != null)
             {
