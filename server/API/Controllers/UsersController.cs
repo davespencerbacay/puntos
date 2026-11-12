@@ -3,22 +3,18 @@ using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
-
 namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UsersController(IGenericRepository<User> userRepository) : ControllerBase
+public class UsersController(IGenericRepository<User> userRepository) : BaseApiController
 {
 
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<User>>> GetUsers([FromQuery] UserSpecParams userSpecParams)
     {
         var spec = new UserSpecification(userSpecParams);
-        var users = await userRepository.ListAsync(spec);
-        var count = await userRepository.CountAsync(spec);
-        var pagination = new Pagination<User>(userSpecParams.PageIndex, userSpecParams.PageSize, count, users);
-        return Ok(pagination);
+        return await CreatePagedResult(userRepository, spec, userSpecParams.PageIndex, userSpecParams.PageSize);
     }
 
     [HttpGet("user-type/{userTypeId}")]
