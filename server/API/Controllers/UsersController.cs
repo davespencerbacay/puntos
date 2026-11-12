@@ -40,7 +40,7 @@ public class UsersController(IGenericRepository<User> userRepository) : BaseApiC
         return user;
     }
 
-    [HttpPost]
+    [HttpPost("register")]
     public async Task<ActionResult<User>> CreateUser(User user)
     {
         userRepository.Add(user);

@@ -5,6 +5,7 @@ namespace Core.Specifications
     public class UserSpecification : BaseSpecification<User>
     {
         public UserSpecification(UserSpecParams userSpecParams) : base(x =>
+            (string.IsNullOrEmpty(userSpecParams.Search) || x.FirstName.ToLower().Contains(userSpecParams.Search) || x.LastName.ToLower().Contains(userSpecParams.Search)) &&
             (!userSpecParams.UserTypeId.HasValue || x.UserTypeId == userSpecParams.UserTypeId) &&
             (userSpecParams.UserTypes.Count == 0 || userSpecParams.UserTypes.Contains(x.UserTypeId.ToString())))
         {
