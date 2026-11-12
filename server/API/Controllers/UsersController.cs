@@ -1,3 +1,4 @@
+using API.RequestHelpers;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
@@ -15,7 +16,9 @@ public class UsersController(IGenericRepository<User> userRepository) : Controll
     {
         var spec = new UserSpecification(userSpecParams);
         var users = await userRepository.ListAsync(spec);
-        return Ok(users);
+        var count = await userRepository.CountAsync(spec);
+        var pagination = new Pagination<User>(userSpecParams.PageIndex, userSpecParams.PageSize, count, users);
+        return Ok(pagination);
     }
 
     [HttpGet("user-type/{userTypeId}")]

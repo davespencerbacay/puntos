@@ -7,6 +7,7 @@ namespace Core.Specifications
         public UserSpecification(UserSpecParams userSpecParams) : base(x => userSpecParams.UserTypes.Count == 0 || userSpecParams.UserTypes.Contains(x.UserTypeId.ToString()))
         {
             AddInclude(x => x.UserType);
+            ApplyPaging(userSpecParams.PageSize * (userSpecParams.PageIndex - 1), userSpecParams.PageSize);
 
             if (!string.IsNullOrWhiteSpace(userSpecParams.Sort))
             {

@@ -23,6 +23,16 @@ namespace Core.Specifications
 
         public bool IsDistinct { get; private set; }
 
+        public IQueryable<T> ApplyCriteria(IQueryable<T> query)
+        {
+            if (Criteria != null)
+            {
+                query = query.Where(Criteria);
+            }
+
+            return query;
+        }
+
         protected void AddInclude(Expression<Func<T, object>> includeExpression)
         {
             Includes.Add(includeExpression);

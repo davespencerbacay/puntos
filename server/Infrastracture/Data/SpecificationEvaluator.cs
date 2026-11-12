@@ -50,6 +50,9 @@ namespace Infrastracture.Data
 
             query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
 
+
+            var selectQuery = query as IQueryable<TResult>;
+
             if (spec.OrderBy != null)
             {
                 query = query.OrderBy(spec.OrderBy);
@@ -61,10 +64,8 @@ namespace Infrastracture.Data
 
             if (spec.IsPagingEnabled)
             {
-                query = query.Skip(spec.Skip).Take(spec.Take);
+                selectQuery = selectQuery?.Skip(spec.Skip).Take(spec.Take);
             }
-
-            var selectQuery = query as IQueryable<TResult>;
             if (spec.Select != null)
             {
                 selectQuery = query.Select(spec.Select);
