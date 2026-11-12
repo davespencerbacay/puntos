@@ -4,7 +4,9 @@ namespace Core.Specifications
 {
     public class UserSpecification : BaseSpecification<User>
     {
-        public UserSpecification(UserSpecParams userSpecParams) : base(x => userSpecParams.UserTypes.Count == 0 || userSpecParams.UserTypes.Contains(x.UserTypeId.ToString()))
+        public UserSpecification(UserSpecParams userSpecParams) : base(x =>
+            (!userSpecParams.UserTypeId.HasValue || x.UserTypeId == userSpecParams.UserTypeId) &&
+            (userSpecParams.UserTypes.Count == 0 || userSpecParams.UserTypes.Contains(x.UserTypeId.ToString())))
         {
             AddInclude(x => x.UserType);
             ApplyPaging(userSpecParams.PageSize * (userSpecParams.PageIndex - 1), userSpecParams.PageSize);

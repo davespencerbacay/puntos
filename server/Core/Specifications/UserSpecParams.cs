@@ -20,6 +20,8 @@ namespace Core.Specifications
             }
         }
 
+        public int? UserTypeId { get; set; }
+
         public string? Sort { get; set; }
     }
 }
