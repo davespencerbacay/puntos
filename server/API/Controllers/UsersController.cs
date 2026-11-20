@@ -58,6 +58,11 @@ public class UsersController(IGenericRepository<User> userRepository, IGenericRe
         }
         return BadRequest("[Users] Problem creating user.");
     }
+    [HttpPost("login")]
+    public async Task<ActionResult<UserDTO>> Login(UserLoginDTO userLoginDto)
+    {
+        return BadRequest("[Users] Problem logging in user.");
+    }
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(int id, UserUpdateDTO userUpdateDto)
     {
